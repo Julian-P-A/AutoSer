@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Menu } from 'lucide-react'
-import logo from '@/assets/logo-autoser.webp'
+import logoSm from '@/assets/logo-autoser-sm.webp'
 
 const NAV_ITEMS = [
   { label: 'Inicio', href: '#inicio' },
@@ -49,10 +49,10 @@ export function Header() {
       <div className="flex items-center justify-between gap-4 px-5 py-3 sm:px-8 sm:py-4 lg:px-12 lg:py-4">
         <a href="#inicio" className="block shrink-0 leading-none">
           <img
-            src={logo}
+            src={logoSm}
             alt="AUTOSER — Centro de Enseñanza Automovilístico"
-            width={340}
-            height={262}
+            width={260}
+            height={201}
             className="block h-14 w-auto transition-[filter] duration-400 sm:h-16 lg:h-[72px]"
             style={{ filter: scrolled ? 'none' : 'brightness(0) invert(1)' }}
           />

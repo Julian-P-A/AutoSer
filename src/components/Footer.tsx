@@ -1,5 +1,6 @@
 import { Facebook, Heart, Instagram, Mail, MapPin, Phone } from 'lucide-react'
 import logo from '@/assets/logo-autoser.webp'
+import logoSm from '@/assets/logo-autoser-sm.webp'
 
 const NAV_ITEMS = [
   { label: 'Inicio', href: '#inicio' },
@@ -46,6 +47,8 @@ export function Footer() {
             <a href="#inicio" className="block leading-none">
               <img
                 src={logo}
+                srcSet={`${logoSm} 260w, ${logo} 340w`}
+                sizes="(min-width: 1024px) 166px, (min-width: 640px) 145px, 124px"
                 alt="AUTOSER — Centro de Enseñanza Automovilístico"
                 width={340}
                 height={262}
