@@ -1,7 +1,7 @@
 import { AnimatedHeading, AnimatedText, MaskedImage } from '@/components/AnimatedHeading'
-import benefit01 from '@/assets/benefit01.jpg'
-import benefit02 from '@/assets/benefit02.jpg'
-import benefit03 from '@/assets/benefit03.jpg'
+import benefit01 from '@/assets/benefit01.webp'
+import benefit02 from '@/assets/benefit02.webp'
+import benefit03 from '@/assets/benefit03.webp'
 
 interface Benefit {
   index: string

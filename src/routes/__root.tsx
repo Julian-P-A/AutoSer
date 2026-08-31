@@ -39,6 +39,7 @@ const ZOOM_SCRIPT = `(function(){
     var w = document.documentElement.clientWidth;
     var z = (w < 1728 && w >= 900) ? w / 1728 : 1;
     document.documentElement.style.zoom = String(z);
+    document.documentElement.style.setProperty("--vh100", (window.innerHeight / z) + "px");
   }
   updateZoom();
   window.addEventListener("resize", updateZoom);
@@ -74,6 +75,8 @@ export const Route = createRootRoute({
       { name: 'twitter:image', content: OG_IMAGE },
     ],
     links: [
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
       { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
       { rel: 'icon', type: 'image/png', sizes: '256x256', href: '/favicon.png' },
       { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
@@ -93,7 +96,7 @@ function NotFound() {
   return (
     <div
       style={{
-        minHeight: '100dvh',
+        minHeight: 'var(--vh100, 100dvh)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -136,6 +139,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       const w = document.documentElement.clientWidth
       const z = w < 1728 && w >= 900 ? w / 1728 : 1
       document.documentElement.style.zoom = String(z)
+      document.documentElement.style.setProperty('--vh100', `${window.innerHeight / z}px`)
     }
     updateZoom()
     window.addEventListener('resize', updateZoom)

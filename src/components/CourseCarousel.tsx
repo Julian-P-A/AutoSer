@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { MaskedImage } from '@/components/AnimatedHeading'
 import { cn } from '@/lib/utils'
-import a2Image from '@/assets/a2.jpg'
-import b1Image from '@/assets/b1.jpg'
-import c1Image from '@/assets/c1.jpg'
+import a2Image from '@/assets/a2.webp'
+import b1Image from '@/assets/b1.webp'
+import c1Image from '@/assets/c1.webp'
 
 interface Course {
   label: string

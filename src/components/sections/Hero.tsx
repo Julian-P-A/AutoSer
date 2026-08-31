@@ -1,13 +1,13 @@
 import { Car } from 'lucide-react'
 import { AnimatedHeading, AnimatedText } from '@/components/AnimatedHeading'
-import heroImage from '@/assets/hero.jpg'
+import heroImage from '@/assets/hero.webp'
 
 export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative h-dvh w-full overflow-hidden"
-      style={{ minHeight: 780 }}
+      className="relative w-full overflow-hidden"
+      style={{ height: 'var(--vh100, 100dvh)', minHeight: 780 }}
     >
       <img
         src={heroImage}

@@ -1,4 +1,4 @@
-import { Heart, Mail, MapPin, Phone } from 'lucide-react'
+import { Facebook, Heart, Instagram, Mail, MapPin, Phone } from 'lucide-react'
 import logo from '@/assets/logo-autoser.webp'
 
 const NAV_ITEMS = [
@@ -7,6 +7,30 @@ const NAV_ITEMS = [
   { label: 'Empresa', href: '#empresa' },
   { label: 'Contacto', href: '#contacto' },
 ]
+
+const SOCIAL_LINKS = [
+  { label: 'Instagram', href: 'https://www.instagram.com/', icon: Instagram },
+  { label: 'Facebook', href: 'https://www.facebook.com/', icon: Facebook },
+  { label: 'TikTok', href: 'https://www.tiktok.com/', icon: TikTokIcon },
+]
+
+function TikTokIcon({ size = 16, strokeWidth = 1.6 }: { size?: number; strokeWidth?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M15 3v10.5a3.5 3.5 0 1 1-3.5-3.5" />
+      <path d="M15 3a5.5 5.5 0 0 0 5.5 5.5V11A8 8 0 0 1 15 8.7" />
+    </svg>
+  )
+}
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -18,19 +42,37 @@ export function Footer() {
     >
       <div className="mx-auto" style={{ maxWidth: 1728 }}>
         <div className="flex flex-wrap items-start justify-between gap-12">
-          <a href="#inicio" className="block shrink-0 leading-none">
-            <img
-              src={logo}
-              alt="AUTOSER — Centro de Enseñanza Automovilístico"
-              className="h-24 w-auto sm:h-28 lg:h-32"
-              style={{ filter: 'brightness(0) invert(1)' }}
-            />
-            <div
-              className="mt-4 text-xs font-medium uppercase tracking-[0.2em] text-white/60"
-            >
-              Más que una enseñanza.
+          <div className="shrink-0">
+            <a href="#inicio" className="block leading-none">
+              <img
+                src={logo}
+                alt="AUTOSER — Centro de Enseñanza Automovilístico"
+                width={340}
+                height={262}
+                className="h-24 w-auto sm:h-28 lg:h-32"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+              <div className="mt-4 text-xs font-medium uppercase tracking-[0.2em] text-white/60">
+                Más que una enseñanza.
+              </div>
+            </a>
+
+            <div className="mt-5 flex gap-3">
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="as-footer-link flex h-9 w-9 items-center justify-center rounded-full transition-opacity"
+                  style={{ background: 'rgba(255,255,255,0.1)' }}
+                >
+                  <social.icon size={16} strokeWidth={1.6} />
+                </a>
+              ))}
             </div>
-          </a>
+          </div>
 
           <div className="flex flex-wrap gap-16">
             <nav className="flex flex-col gap-3 text-[14px]">

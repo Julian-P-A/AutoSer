@@ -51,6 +51,8 @@ export function Header() {
           <img
             src={logo}
             alt="AUTOSER — Centro de Enseñanza Automovilístico"
+            width={340}
+            height={262}
             className="block h-14 w-auto transition-[filter] duration-400 sm:h-16 lg:h-[72px]"
             style={{ filter: scrolled ? 'none' : 'brightness(0) invert(1)' }}
           />

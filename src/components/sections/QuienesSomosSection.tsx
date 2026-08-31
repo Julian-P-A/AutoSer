@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react'
 import { AnimatedHeading, AnimatedText, MaskedImage } from '@/components/AnimatedHeading'
-import quienesSomos from '@/assets/quienes-somos.jpg'
+import quienesSomos from '@/assets/quienes-somos.webp'
 
 const FEATURES = [
   'Habilitados por el Ministerio de Transporte',
