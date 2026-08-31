@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap');
+@import 'tailwindcss' source(none);
+@source '../src';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  color-scheme: light;
+
+  --background: #f7f8f9;
+  --foreground: #17191c;
+
+  --surface: #eef1f4;
+  --surface-light: #ffffff;
+
+  --muted: #e7eaed;
+  --muted-foreground: #70777f;
+
+  --primary: #183fb8;
+  --primary-dark: #102a7d;
+  --primary-light: #e7ebf7;
+
+  --border: #dce1e5;
+
+  --header-dark-bg: rgba(18, 24, 30, 0.74);
+  --header-light-bg: rgba(255, 255, 255, 0.82);
+
+  --card: #ffffff;
+  --card-foreground: var(--foreground);
+  --popover: #ffffff;
+  --popover-foreground: var(--foreground);
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface);
+  --secondary-foreground: var(--foreground);
+  --accent: var(--primary-light);
+  --accent-foreground: var(--primary-dark);
+  --destructive: #b3261e;
+  --destructive-foreground: #ffffff;
+  --input: var(--border);
+  --ring: var(--primary);
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-heading: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-border: var(--border);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+}
+
+/* Editorial heading tracking used throughout the site */
+.font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.035em;
+}
+
+/* Film-grain overlay used on all campaign photography */
+.as-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.as-photo-tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(24, 63, 184, 0.2), rgba(18, 24, 30, 0.1));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.as-photo {
+  filter: grayscale(12%) saturate(0.9) contrast(1.05) brightness(0.98);
+}
+
+.as-nav-link {
+  position: relative;
+}
+
+.as-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1.5px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+}
+
+.as-nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.as-primary-pill {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+.as-primary-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.as-primary-pill:hover .as-pill-icon {
+  transform: translate(2px, -2px);
+}
+
+.as-pill-icon {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.as-secondary-link:hover .as-pill-icon {
+  transform: translate(2px, -2px);
+}
+
+.as-secondary-link:hover {
+  opacity: 0.82;
+}
+
+.as-carousel-track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.as-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.as-carousel-control {
+  transition: opacity 0.3s ease;
+}
+
+.as-carousel-wrap:hover .as-carousel-control {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.as-ctrl-btn {
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.as-ctrl-btn:hover {
+  transform: scale(1.06);
+  color: var(--primary);
+}
+
+.as-menu-item:hover {
+  background: var(--surface);
+}
+
+.as-footer-link:hover {
+  opacity: 0.68;
+}
+
+@layer base {
+  * {
+    @apply outline-ring/50;
+  }
+}
