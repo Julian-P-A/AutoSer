@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 const EASE = [0.22, 1, 0.36, 1] as const
+const EASE_CSS = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
 interface AnimatedHeadingProps {
   children: ReactNode
@@ -10,7 +11,13 @@ interface AnimatedHeadingProps {
   className?: string
   style?: CSSProperties
   delay?: number
-  /** false for content already in the initial viewport (e.g. the hero) so it plays on mount instead of waiting for a scroll-triggered intersection. */
+  /**
+   * false for content already in the initial viewport (e.g. the hero) so it
+   * plays on mount via a plain CSS animation instead of waiting on
+   * scroll-triggered Framer Motion — CSS starts painting immediately,
+   * independent of when JS hydrates, which keeps LCP-critical content from
+   * being held invisible until the JS bundle loads.
+   */
   onScroll?: boolean
 }
 
@@ -23,16 +30,28 @@ export function AnimatedHeading({
   delay = 0,
   onScroll = true,
 }: AnimatedHeadingProps) {
+  if (!onScroll) {
+    return (
+      <Tag
+        className={cn('font-heading', className)}
+        style={{
+          ...style,
+          animation: `as-cssreveal-heading 0.9s ${EASE_CSS} ${delay}s both`,
+        }}
+      >
+        {children}
+      </Tag>
+    )
+  }
+
   const MotionTag = motion.create(Tag)
-  const target = { opacity: 1, y: 0, filter: 'blur(0px)' }
   return (
     <MotionTag
       className={cn('font-heading', className)}
       style={style}
       initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
-      {...(onScroll
-        ? { whileInView: target, viewport: { once: true, margin: '0px' } }
-        : { animate: target })}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: '0px' }}
       transition={{ duration: 0.9, ease: EASE, delay }}
     >
       {children}
@@ -58,16 +77,28 @@ export function AnimatedText({
   delay = 0,
   onScroll = true,
 }: AnimatedTextProps) {
+  if (!onScroll) {
+    return (
+      <Tag
+        className={className}
+        style={{
+          ...style,
+          animation: `as-cssreveal-text 0.7s ${EASE_CSS} ${delay}s both`,
+        }}
+      >
+        {children}
+      </Tag>
+    )
+  }
+
   const MotionTag = motion.create(Tag)
-  const target = { opacity: 1, y: 0 }
   return (
     <MotionTag
       className={className}
       style={style}
       initial={{ opacity: 0, y: 20 }}
-      {...(onScroll
-        ? { whileInView: target, viewport: { once: true, margin: '0px' } }
-        : { animate: target })}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px' }}
       transition={{ duration: 0.7, ease: EASE, delay }}
     >
       {children}
@@ -99,17 +130,8 @@ export function MaskedImage({
   grain = true,
   onScroll = true,
 }: MaskedImageProps) {
-  const target = { clipPath: 'inset(0% 0 0 0)' }
-  return (
-    <motion.div
-      className={cn('relative overflow-hidden', className)}
-      style={style}
-      initial={{ clipPath: 'inset(100% 0 0 0)' }}
-      {...(onScroll
-        ? { whileInView: target, viewport: { once: true, margin: '0px' } }
-        : { animate: target })}
-      transition={{ duration: 1.1, ease: EASE, delay }}
-    >
+  const img = (
+    <>
       <img
         src={src}
         alt={alt}
@@ -119,6 +141,34 @@ export function MaskedImage({
       />
       {tint && <div className="as-photo-tint" />}
       {grain && <div className="as-grain" />}
+    </>
+  )
+
+  if (!onScroll) {
+    return (
+      <div
+        className={cn('relative overflow-hidden', className)}
+        style={{
+          ...style,
+          animation: `as-cssreveal-mask 1.1s ${EASE_CSS} ${delay}s both`,
+        }}
+      >
+        {img}
+      </div>
+    )
+  }
+
+  const target = { clipPath: 'inset(0% 0 0 0)' }
+  return (
+    <motion.div
+      className={cn('relative overflow-hidden', className)}
+      style={style}
+      initial={{ clipPath: 'inset(100% 0 0 0)' }}
+      whileInView={target}
+      viewport={{ once: true, margin: '0px' }}
+      transition={{ duration: 1.1, ease: EASE, delay }}
+    >
+      {img}
     </motion.div>
   )
 }

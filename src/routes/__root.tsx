@@ -34,16 +34,6 @@ const STRUCTURED_DATA = {
   sameAs: [SITE_URL],
 }
 
-const FONT_HREF =
-  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap'
-
-const FONT_SCRIPT = `(function(){
-  var link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = "${FONT_HREF}";
-  document.head.appendChild(link);
-})();`
-
 const ZOOM_SCRIPT = `(function(){
   function updateZoom(){
     var w = document.documentElement.clientWidth;
@@ -85,13 +75,24 @@ export const Route = createRootRoute({
       { name: 'twitter:image', content: OG_IMAGE },
     ],
     links: [
-      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
+      {
+        rel: 'preload',
+        as: 'font',
+        type: 'font/woff2',
+        href: '/fonts/inter-latin-var.woff2',
+        crossOrigin: 'anonymous',
+      },
+      {
+        rel: 'preload',
+        as: 'font',
+        type: 'font/woff2',
+        href: '/fonts/inter-tight-latin-var.woff2',
+        crossOrigin: 'anonymous',
+      },
       { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
       { rel: 'icon', type: 'image/png', sizes: '256x256', href: '/favicon.png' },
       { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
       { rel: 'canonical', href: SITE_URL },
-      { rel: 'preload', as: 'style', href: FONT_HREF },
       { rel: 'stylesheet', href: appCss },
     ],
   }),
@@ -161,10 +162,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
         />
-        <script dangerouslySetInnerHTML={{ __html: FONT_SCRIPT }} />
-        <noscript>
-          <link rel="stylesheet" href={FONT_HREF} />
-        </noscript>
         <script dangerouslySetInnerHTML={{ __html: ZOOM_SCRIPT }} />
       </head>
       <body suppressHydrationWarning>
