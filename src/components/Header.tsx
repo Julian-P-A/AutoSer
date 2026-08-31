@@ -53,6 +53,7 @@ export function Header() {
             alt="AUTOSER — Centro de Enseñanza Automovilístico"
             width={260}
             height={201}
+            fetchPriority="high"
             className="block h-14 w-auto transition-[filter] duration-400 sm:h-16 lg:h-[72px]"
             style={{ filter: scrolled ? 'none' : 'brightness(0) invert(1)' }}
           />
