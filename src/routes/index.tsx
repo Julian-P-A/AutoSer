@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { WhatsAppFloat } from '@/components/WhatsAppFloat'
 import { Hero } from '@/components/sections/Hero'
 import { QuienesSomosSection } from '@/components/sections/QuienesSomosSection'
 import { CoursesSection } from '@/components/sections/CoursesSection'
@@ -23,6 +24,7 @@ function Home() {
         <ContactCTA />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </div>
   )
 }

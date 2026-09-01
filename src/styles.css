@@ -283,6 +283,21 @@ body {
   opacity: 0.68;
 }
 
+/* Gated to real pointer/hover devices so tapping on touchscreens never
+   leaves the tooltip stuck open (touch has no "mouse leave" to reset it). */
+@media (hover: hover) and (pointer: fine) {
+  .as-whatsapp-float:hover .as-whatsapp-tooltip {
+    max-width: 240px;
+    padding-left: 20px;
+    padding-right: 20px;
+    opacity: 1;
+  }
+
+  .as-whatsapp-float:hover .as-whatsapp-bubble {
+    transform: scale(1.05);
+  }
+}
+
 @layer base {
   * {
     @apply outline-ring/50;

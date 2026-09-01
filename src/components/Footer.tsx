@@ -1,4 +1,4 @@
-import { Facebook, Heart, Instagram, Mail, MapPin, Phone } from 'lucide-react'
+import { Clock, Facebook, Heart, Instagram, Mail, MapPin, Phone } from 'lucide-react'
 import logo from '@/assets/logo-autoser.webp'
 import logoSm from '@/assets/logo-autoser-sm.webp'
 
@@ -113,6 +113,23 @@ export function Footer() {
                 <Mail size={16} strokeWidth={1.6} className="shrink-0" />
                 contacto@escuelaautoser.com
               </a>
+            </div>
+
+            <div className="flex flex-col gap-3 text-[14px]" style={{ minWidth: 190 }}>
+              <div className="flex items-center gap-2.5 text-white/85">
+                <Clock size={16} strokeWidth={1.6} className="shrink-0" />
+                Horarios de atención
+              </div>
+              <div className="flex flex-col gap-1 pl-[26px] text-white/70">
+                <div className="flex justify-between gap-4">
+                  <span>Lunes a viernes</span>
+                  <span>8 AM – 6 PM</span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span>Sábado y domingo</span>
+                  <span>Cerrado</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

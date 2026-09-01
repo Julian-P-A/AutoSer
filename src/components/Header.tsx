@@ -70,6 +70,13 @@ export function Header() {
                   {item.label}
                 </a>
               ))}
+              <a
+                href="#contacto"
+                className="rounded-full px-5 py-[9px] text-[14px] font-medium text-white shadow-[0_2px_10px_rgba(0,0,0,0.25)] ring-1 ring-white/15 transition-transform hover:-translate-y-px"
+                style={{ background: 'var(--primary)' }}
+              >
+                Quiero hacer mi curso
+              </a>
             </div>
             <button
               onClick={() => setMenuOpen((v) => !v)}
