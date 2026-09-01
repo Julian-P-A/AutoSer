@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from 'lucide-react'
+import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { AnimatedHeading, AnimatedText } from '@/components/AnimatedHeading'
 
 const ADDRESS = 'CR 9 #43-50, Ibagué, Tolima'
@@ -69,6 +69,24 @@ export function EncuentranosSection() {
                 <br />
                 Ibagué, Tolima
               </span>
+            </div>
+            <div className="flex items-start gap-3">
+              <Clock
+                size={17}
+                strokeWidth={1.6}
+                className="mt-0.5 shrink-0"
+                style={{ color: 'var(--primary)' }}
+              />
+              <div className="flex flex-col gap-1">
+                <div className="flex items-baseline gap-2">
+                  <span>Lunes a viernes</span>
+                  <span style={{ color: '#4b5157' }}>· 8:00 AM – 6:00 PM</span>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span>Sábado y domingo</span>
+                  <span style={{ color: '#4b5157' }}>· Cerrado</span>
+                </div>
+              </div>
             </div>
             <a href="tel:+573182366011" className="flex items-center gap-3">
               <Phone size={17} strokeWidth={1.6} className="shrink-0" style={{ color: 'var(--primary)' }} />

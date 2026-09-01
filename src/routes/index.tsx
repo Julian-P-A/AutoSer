@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { PreHeader } from '@/components/PreHeader'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { WhatsAppFloat } from '@/components/WhatsAppFloat'
@@ -14,6 +15,7 @@ export const Route = createFileRoute('/')({ component: Home })
 function Home() {
   return (
     <div className="relative w-full overflow-x-hidden">
+      <PreHeader />
       <Header />
       <main>
         <Hero />

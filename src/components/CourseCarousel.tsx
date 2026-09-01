@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Bus, Car, Motorbike } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { MaskedImage } from '@/components/AnimatedHeading'
 import { cn } from '@/lib/utils'
 import a2Image from '@/assets/a2.webp'
@@ -12,6 +13,7 @@ interface Course {
   description: string
   image: string
   alt: string
+  icon: LucideIcon
 }
 
 const COURSES: Course[] = [
@@ -22,6 +24,7 @@ const COURSES: Course[] = [
       'Motocicletas, motociclos y mototriciclos de más de 125 c.c. de cilindrada.',
     image: a2Image,
     alt: 'Estudiante recibiendo instrucción de conducción de motocicleta',
+    icon: Motorbike,
   },
   {
     label: 'SERVICIO PARTICULAR',
@@ -29,6 +32,7 @@ const COURSES: Course[] = [
     description: 'Automóviles, camperos, camionetas y microbuses de servicio particular.',
     image: b1Image,
     alt: 'Vehículo particular usado para las clases de conducción',
+    icon: Car,
   },
   {
     label: 'SERVICIO PÚBLICO',
@@ -36,6 +40,7 @@ const COURSES: Course[] = [
     description: 'Automóviles, camperos, camionetas y microbuses de servicio público.',
     image: c1Image,
     alt: 'Instrucción de conducción para vehículos de servicio público',
+    icon: Bus,
   },
 ]
 
@@ -77,7 +82,7 @@ export function CourseCarousel() {
     <div className="as-carousel-wrap group relative min-w-0 flex-1 pr-5 sm:pr-8 lg:pr-16">
       <div
         ref={trackRef}
-        className="as-carousel-track flex gap-6 overflow-x-auto pb-1"
+        className="as-carousel-track flex gap-6 overflow-x-auto pb-9"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         {COURSES.map((course, i) => (
@@ -113,6 +118,20 @@ export function CourseCarousel() {
               >
                 {course.description}
               </p>
+              <a
+                href={`https://wa.me/573182366011?text=${encodeURIComponent(
+                  `Hola, quiero información sobre el curso ${course.title}`,
+                )}`}
+                target="_blank"
+                rel="noopener"
+                className="as-primary-pill mt-5 inline-flex items-center gap-3 rounded-full py-[5px] pl-5 pr-[5px] text-sm font-medium text-white"
+                style={{ background: 'var(--primary)' }}
+              >
+                Quiero información
+                <span className="as-pill-icon flex h-8 w-8 items-center justify-center rounded-full bg-white">
+                  <course.icon size={14} strokeWidth={1.8} style={{ color: 'var(--primary)' }} />
+                </span>
+              </a>
             </div>
           </article>
         ))}

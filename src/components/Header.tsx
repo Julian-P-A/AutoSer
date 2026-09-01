@@ -12,16 +12,26 @@ const NAV_ITEMS = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
+  // Reasonable guess matching the pre-header's rendered height, corrected
+  // to the exact measurement on mount to avoid an initial-paint flash.
+  const [headerTop, setHeaderTop] = useState(36)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleScroll() {
       setScrolled(window.scrollY > window.innerHeight * 0.72)
+      const preHeader = document.getElementById('pre-header')
+      const preHeaderHeight = preHeader ? preHeader.offsetHeight : 0
+      setHeaderTop(Math.max(0, preHeaderHeight - window.scrollY))
     }
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [])
 
   useEffect(() => {
@@ -38,8 +48,9 @@ export function Header() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-400"
+      className="fixed inset-x-0 z-50 transition-[background-color,border-color] duration-400"
       style={{
+        top: headerTop,
         background: scrolled ? 'var(--header-light-bg)' : 'transparent',
         borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
